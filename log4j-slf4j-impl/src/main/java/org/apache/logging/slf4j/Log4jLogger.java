@@ -70,6 +70,56 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     }
 
     @Override
+    public void trace(final String format, final Object arg1, final Object arg2, final Object arg3) {
+        logger.logIfEnabled(FQCN, Level.TRACE, null, format, arg1, arg2, arg3);
+    }
+
+    @Override
+    public void trace(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4) {
+        logger.logIfEnabled(FQCN, Level.TRACE, null, format, arg1, arg2, arg3, arg4);
+    }
+
+    @Override
+    public void trace(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5) {
+        logger.logIfEnabled(FQCN, Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    @Override
+    public void trace(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6) {
+        logger.logIfEnabled(FQCN, Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    @Override
+    public void trace(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7) {
+        logger.logIfEnabled(FQCN, Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    @Override
+    public void trace(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8) {
+        logger.logIfEnabled(FQCN, Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    }
+
+    @Override
+    public void trace(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9) {
+        logger.logIfEnabled(FQCN, Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+    }
+
+    @Override
+    public void trace(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9, final Object arg10) {
+        logger.logIfEnabled(FQCN, Level.TRACE, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+    }
+
+    @Override
     public void trace(final String format, final Object... args) {
         logger.logIfEnabled(FQCN, Level.TRACE, null, format, args);
     }
@@ -105,6 +155,55 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     }
 
     @Override
+    public void trace(final Marker marker, final String s, final Object o, final Object o1, final Object o2) {
+        logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, o, o1, o2);
+    }
+
+    @Override
+    public void trace(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3) {
+        logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, o, o1, o2, o3);
+    }
+
+    @Override
+    public void trace(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4) {
+        logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, o, o1, o2, o3, o4);
+    }
+
+    @Override
+    public void trace(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5) {
+        logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, o, o1, o2, o3, o4, o5);
+    }
+
+    @Override
+    public void trace(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6) {
+        logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6);
+    }
+
+    @Override
+    public void trace(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7) {
+        logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7);
+    }
+
+    @Override
+    public void trace(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8) {
+        logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8);
+    }
+
+    @Override
+    public void trace(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8, final Object o9) {
+        logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8, o9);
+    }
+
+    @Override
     public void trace(final Marker marker, final String s, final Object... objects) {
         logger.logIfEnabled(FQCN, Level.TRACE, getMarker(marker), s, objects);
     }
@@ -127,6 +226,56 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     @Override
     public void debug(final String format, final Object arg1, final Object arg2) {
         logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2);
+    }
+
+    @Override
+    public void debug(final String format, final Object arg1, final Object arg2, final Object arg3) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2, arg3);
+    }
+
+    @Override
+    public void debug(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2, arg3, arg4);
+    }
+
+    @Override
+    public void debug(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    @Override
+    public void debug(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    @Override
+    public void debug(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    @Override
+    public void debug(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    }
+
+    @Override
+    public void debug(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+    }
+
+    @Override
+    public void debug(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9, final Object arg10) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
     }
 
     @Override
@@ -165,6 +314,55 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     }
 
     @Override
+    public void debug(final Marker marker, final String s, final Object o, final Object o1, final Object o2) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, o, o1, o2);
+    }
+
+    @Override
+    public void debug(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, o, o1, o2, o3);
+    }
+
+    @Override
+    public void debug(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, o, o1, o2, o3, o4);
+    }
+
+    @Override
+    public void debug(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, o, o1, o2, o3, o4, o5);
+    }
+
+    @Override
+    public void debug(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6);
+    }
+
+    @Override
+    public void debug(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7);
+    }
+
+    @Override
+    public void debug(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8);
+    }
+
+    @Override
+    public void debug(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8, final Object o9) {
+        logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8, o9);
+    }
+
+    @Override
     public void debug(final Marker marker, final String s, final Object... objects) {
         logger.logIfEnabled(FQCN, Level.DEBUG, getMarker(marker), s, objects);
     }
@@ -187,6 +385,56 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     @Override
     public void info(final String format, final Object arg1, final Object arg2) {
         logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2);
+    }
+
+    @Override
+    public void info(final String format, final Object arg1, final Object arg2, final Object arg3) {
+        logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2, arg3);
+    }
+
+    @Override
+    public void info(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4) {
+        logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2, arg3, arg4);
+    }
+
+    @Override
+    public void info(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5) {
+        logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    @Override
+    public void info(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6) {
+        logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    @Override
+    public void info(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7) {
+        logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    @Override
+    public void info(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8) {
+        logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    }
+
+    @Override
+    public void info(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9) {
+        logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+    }
+
+    @Override
+    public void info(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9, final Object arg10) {
+        logger.logIfEnabled(FQCN, Level.INFO, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
     }
 
     @Override
@@ -225,6 +473,55 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     }
 
     @Override
+    public void info(final Marker marker, final String s, final Object o, final Object o1, final Object o2) {
+        logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, o, o1, o2);
+    }
+
+    @Override
+    public void info(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3) {
+        logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, o, o1, o2, o3);
+    }
+
+    @Override
+    public void info(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4) {
+        logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, o, o1, o2, o3, o4);
+    }
+
+    @Override
+    public void info(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5) {
+        logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, o, o1, o2, o3, o4, o5);
+    }
+
+    @Override
+    public void info(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6) {
+        logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6);
+    }
+
+    @Override
+    public void info(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7) {
+        logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7);
+    }
+
+    @Override
+    public void info(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8) {
+        logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8);
+    }
+
+    @Override
+    public void info(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8, final Object o9) {
+        logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8, o9);
+    }
+
+    @Override
     public void info(final Marker marker, final String s, final Object... objects) {
         logger.logIfEnabled(FQCN, Level.INFO, getMarker(marker), s, objects);
     }
@@ -247,6 +544,56 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     @Override
     public void warn(final String format, final Object arg1, final Object arg2) {
         logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2);
+    }
+
+    @Override
+    public void warn(final String format, final Object arg1, final Object arg2, final Object arg3) {
+        logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2, arg3);
+    }
+
+    @Override
+    public void warn(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4) {
+        logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2, arg3, arg4);
+    }
+
+    @Override
+    public void warn(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5) {
+        logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    @Override
+    public void warn(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6) {
+        logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    @Override
+    public void warn(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7) {
+        logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    @Override
+    public void warn(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8) {
+        logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    }
+
+    @Override
+    public void warn(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9) {
+        logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+    }
+
+    @Override
+    public void warn(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9, final Object arg10) {
+        logger.logIfEnabled(FQCN, Level.WARN, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
     }
 
     @Override
@@ -285,6 +632,55 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     }
 
     @Override
+    public void warn(final Marker marker, final String s, final Object o, final Object o1, final Object o2) {
+        logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, o, o1, o2);
+    }
+
+    @Override
+    public void warn(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3) {
+        logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, o, o1, o2, o3);
+    }
+
+    @Override
+    public void warn(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4) {
+        logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, o, o1, o2, o3, o4);
+    }
+
+    @Override
+    public void warn(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5) {
+        logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, o, o1, o2, o3, o4, o5);
+    }
+
+    @Override
+    public void warn(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6) {
+        logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6);
+    }
+
+    @Override
+    public void warn(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7) {
+        logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7);
+    }
+
+    @Override
+    public void warn(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8) {
+        logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8);
+    }
+
+    @Override
+    public void warn(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8, final Object o9) {
+        logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8, o9);
+    }
+
+    @Override
     public void warn(final Marker marker, final String s, final Object... objects) {
         logger.logIfEnabled(FQCN, Level.WARN, getMarker(marker), s, objects);
     }
@@ -307,6 +703,56 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     @Override
     public void error(final String format, final Object arg1, final Object arg2) {
         logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2);
+    }
+
+    @Override
+    public void error(final String format, final Object arg1, final Object arg2, final Object arg3) {
+        logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2, arg3);
+    }
+
+    @Override
+    public void error(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4) {
+        logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2, arg3, arg4);
+    }
+
+    @Override
+    public void error(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5) {
+        logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5);
+    }
+
+    @Override
+    public void error(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6) {
+        logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5, arg6);
+    }
+
+    @Override
+    public void error(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7) {
+        logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    }
+
+    @Override
+    public void error(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8) {
+        logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    }
+
+    @Override
+    public void error(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9) {
+        logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+    }
+
+    @Override
+    public void error(final String format, final Object arg1, final Object arg2, final Object arg3,
+                      final Object arg4, final Object arg5, final Object arg6, final Object arg7,
+                      final Object arg8, final Object arg9, final Object arg10) {
+        logger.logIfEnabled(FQCN, Level.ERROR, null, format, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
     }
 
     @Override
@@ -342,6 +788,55 @@ public class Log4jLogger implements LocationAwareLogger, Serializable {
     @Override
     public void error(final Marker marker, final String s, final Object o, final Object o1) {
         logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1);
+    }
+
+    @Override
+    public void error(final Marker marker, final String s, final Object o, final Object o1, final Object o2) {
+        logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1, o2);
+    }
+
+    @Override
+    public void error(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3) {
+        logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1, o2, o3);
+    }
+
+    @Override
+    public void error(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4) {
+        logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1, o2, o3, o4);
+    }
+
+    @Override
+    public void error(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5) {
+        logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1, o2, o3, o4, o5);
+    }
+
+    @Override
+    public void error(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6) {
+        logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6);
+    }
+
+    @Override
+    public void error(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7) {
+        logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7);
+    }
+
+    @Override
+    public void error(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8) {
+        logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8);
+    }
+
+    @Override
+    public void error(final Marker marker, final String s, final Object o, final Object o1, final Object o2,
+                      final Object o3, final Object o4, final Object o5, final Object o6, final Object o7,
+                      final Object o8, final Object o9) {
+        logger.logIfEnabled(FQCN, Level.ERROR, getMarker(marker), s, o, o1, o2, o3, o4, o5, o6, o7, o8, o9);
     }
 
     @Override
