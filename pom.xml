@@ -18,7 +18,7 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.logging.log4j</groupId>
+  <groupId>uk.co.nichesolutions.logging.log4j</groupId>
   <artifactId>log4j</artifactId>
   <packaging>pom</packaging>
   <name>Apache Log4j 2</name>
@@ -242,12 +242,12 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.slf4j</groupId>
+        <groupId>uk.co.nichesolutions</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${slf4jVersion}</version>
       </dependency>
        <dependency>
-        <groupId>org.slf4j</groupId>
+        <groupId>uk.co.nichesolutions</groupId>
         <artifactId>slf4j-ext</artifactId>
         <version>${slf4jVersion}</version>
       </dependency>
@@ -303,31 +303,31 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
+        <groupId>uk.co.nichesolutions.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
+        <groupId>uk.co.nichesolutions.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
+        <groupId>uk.co.nichesolutions.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
+        <groupId>uk.co.nichesolutions.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
+        <groupId>uk.co.nichesolutions.logging.log4j</groupId>
         <artifactId>log4j-slf4j-impl</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1171,14 +1171,14 @@
   </reporting>
   <distributionManagement>
      <repository>
-      <id>apache.releases.https</id>
+      <id>sonatype-nexus</id>
       <name>Apache Release Distribution Repository</name>
-      <url>https://repository.apache.org/service/local/staging/deploy/maven2</url>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
     <snapshotRepository>
-      <id>apache.snapshots.https</id>
+      <id>sonatype-nexus-snapshots</id>
       <name>Apache Development Snapshot Repository</name>
-      <url>https://repository.apache.org/content/repositories/snapshots</url>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <site>
       <id>apache.website</id>
