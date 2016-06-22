@@ -83,6 +83,7 @@ public class ReusableParameterizedMessage implements ReusableMessage {
 
     private void init(final String messagePattern, final int argCount, final Object[] paramArray) {
         this.varargs = null;
+        this.throwable = null;
         this.messagePattern = messagePattern;
         this.argCount = argCount;
         int placeholderCount = count(messagePattern, indices);
