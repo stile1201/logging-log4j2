@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core;
 
+import static org.apache.logging.log4j.core.util.ShutdownCallbackRegistry.SHUTDOWN_HOOK_MARKER;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -45,16 +47,15 @@ import org.apache.logging.log4j.spi.AbstractLogger;
 import org.apache.logging.log4j.spi.LoggerContextFactory;
 import org.apache.logging.log4j.spi.LoggerRegistry;
 import org.apache.logging.log4j.spi.Terminable;
-
-import static org.apache.logging.log4j.core.util.ShutdownCallbackRegistry.*;
+import org.apache.logging.log4j.util.PropertiesUtil;
 
 /**
  * The LoggerContext is the anchor for the logging system. It maintains a list of all the loggers requested by
  * applications and a reference to the Configuration. The Configuration will contain the configured loggers, appenders,
  * filters, etc and will be atomically updated whenever a reconfigure occurs.
  */
-public class LoggerContext extends AbstractLifeCycle implements org.apache.logging.log4j.spi.LoggerContext, Terminable,
-        ConfigurationListener {
+public class LoggerContext extends AbstractLifeCycle
+        implements org.apache.logging.log4j.spi.LoggerContext, AutoCloseable, Terminable, ConfigurationListener {
 
     /**
      * Property name of the property change event fired if the configuration is changed.
@@ -205,6 +206,10 @@ public class LoggerContext extends AbstractLifeCycle implements org.apache.loggi
     @Override
     public void start() {
         LOGGER.debug("Starting LoggerContext[name={}, {}]...", getName(), this);
+        if (PropertiesUtil.getProperties().getBooleanProperty("log4j.LoggerContext.stacktrace.on.start", false)) {
+            LOGGER.debug("Stack trace to locate invoker",
+                    new Exception("Not a real error, showing stack trace to locate invoker"));
+        }
         if (configLock.tryLock()) {
             try {
                 if (this.isInitialized() || this.isStopped()) {
@@ -274,6 +279,11 @@ public class LoggerContext extends AbstractLifeCycle implements org.apache.loggi
                 }
             }
         }
+    }
+
+    @Override
+    public void close() {
+        stop();
     }
 
     @Override
@@ -424,7 +434,7 @@ public class LoggerContext extends AbstractLifeCycle implements org.apache.loggi
      * @return True if the Logger exists, false otherwise.
      */
     @Override
-    public boolean hasLogger(final String name, MessageFactory messageFactory) {
+    public boolean hasLogger(final String name, final MessageFactory messageFactory) {
         return loggerRegistry.hasLogger(name, messageFactory);
     }
 
@@ -435,7 +445,7 @@ public class LoggerContext extends AbstractLifeCycle implements org.apache.loggi
      * @return True if the Logger exists, false otherwise.
      */
     @Override
-    public boolean hasLogger(final String name, Class<? extends MessageFactory> messageFactoryClass) {
+    public boolean hasLogger(final String name, final Class<? extends MessageFactory> messageFactoryClass) {
         return loggerRegistry.hasLogger(name, messageFactoryClass);
     }
 

@@ -58,14 +58,14 @@ public final class RootThrowablePatternConverter extends ThrowablePatternConvert
      */
     @Override
     public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        ThrowableProxy proxy = event.getThrownProxy();
+        final ThrowableProxy proxy = event.getThrownProxy();
         final Throwable throwable = event.getThrown();
         if (throwable != null && options.anyLines()) {
             if (proxy == null) {
                 super.format(event, toAppendTo);
                 return;
             }
-            final String trace = proxy.getCauseStackTraceAsString(options.getPackages());
+            final String trace = proxy.getCauseStackTraceAsString(options.getIgnorePackages());
             final int len = toAppendTo.length();
             if (len > 0 && !Character.isWhitespace(toAppendTo.charAt(len - 1))) {
                 toAppendTo.append(' ');

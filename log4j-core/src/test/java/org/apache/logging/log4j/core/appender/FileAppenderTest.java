@@ -16,10 +16,12 @@
  */
 package org.apache.logging.log4j.core.appender;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -39,8 +41,6 @@ import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  *
@@ -139,33 +139,30 @@ public class FileAppenderTest {
     @Test
     @Ignore
     public void testMultipleVMs() throws Exception {
-
         final String classPath = System.getProperty("java.class.path");
         final Integer count = 10;
-        final int processes = 3;
-        final Process[] process = new Process[processes];
-        final ProcessBuilder[] builders = new ProcessBuilder[processes];
-        for (int index = 0; index < processes; ++index) {
-            builders[index] = new ProcessBuilder("java", "-cp", classPath, ProcessTest.class.getName(), "Process "
-                    + index, count.toString(), "true");
+        final int processeCount = 3;
+        final Process[] processes = new Process[processeCount];
+        final ProcessBuilder[] builders = new ProcessBuilder[processeCount];
+        for (int index = 0; index < processeCount; ++index) {
+            builders[index] = new ProcessBuilder("java", "-cp", classPath, ProcessTest.class.getName(),
+                    "Process " + index, count.toString(), "true");
         }
-        for (int index = 0; index < processes; ++index) {
-            process[index] = builders[index].start();
+        for (int index = 0; index < processeCount; ++index) {
+            processes[index] = builders[index].start();
         }
-        for (int index = 0; index < processes; ++index) {
-            final Process p = process[index];
+        for (int index = 0; index < processeCount; ++index) {
+            final Process process = processes[index];
             // System.out.println("Process " + index + " exited with " + p.waitFor());
-            final InputStream is = p.getInputStream();
-            final InputStreamReader isr = new InputStreamReader(is);
-            final BufferedReader br = new BufferedReader(isr);
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
+            try (final BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    System.out.println(line);
+                }
             }
-            is.close();
-            p.destroy();
+            process.destroy();
         }
-        verifyFile(count * processes);
+        verifyFile(count * processeCount);
     }
 
     private static void writer(final boolean lock, final int count, final String name) throws Exception {

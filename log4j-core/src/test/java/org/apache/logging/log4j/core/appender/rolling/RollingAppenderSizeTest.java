@@ -16,6 +16,15 @@
  */
 package org.apache.logging.log4j.core.appender.rolling;
 
+import static org.apache.logging.log4j.hamcrest.Descriptors.that;
+import static org.apache.logging.log4j.hamcrest.FileMatchers.hasName;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.hasItemInArray;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,20 +42,18 @@ import org.apache.logging.log4j.junit.LoggerContextRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.RuleChain;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import static org.apache.logging.log4j.hamcrest.Descriptors.that;
-import static org.apache.logging.log4j.hamcrest.FileMatchers.hasName;
-import static org.hamcrest.Matchers.endsWith;
-import static org.hamcrest.Matchers.hasItemInArray;
-import static org.junit.Assert.*;
 
 /**
  *
  */
 @RunWith(Parameterized.class)
 public class RollingAppenderSizeTest {
+
+    @Rule
+    public RuleChain chain;
 
     private static final String DIR = "target/rolling1";
 
@@ -64,21 +71,22 @@ public class RollingAppenderSizeTest {
                 {"log4j-rolling-bzip2.xml", ".bz2"}, //
                 {"log4j-rolling-deflate.xml", ".deflate"}, //
                 {"log4j-rolling-pack200.xml", ".pack200"}, //
-                {"log4j-rolling-xz.xml", ".xz"},});
+                {"log4j-rolling-xz.xml", ".xz"}, //
+                });
                 // @formatter:on
     }
 
-    @Rule
-    public LoggerContextRule init;
+    private LoggerContextRule loggerContextRule;
 
     public RollingAppenderSizeTest(final String configFile, final String fileExtension) {
         this.fileExtension = fileExtension;
-        this.init = new LoggerContextRule(configFile);
+        this.loggerContextRule = new LoggerContextRule(configFile);
+        this.chain = loggerContextRule.withCleanFoldersRule(DIR);
     }
 
     @Before
     public void setUp() throws Exception {
-        this.logger = this.init.getLogger(RollingAppenderSizeTest.class.getName());
+        this.logger = this.loggerContextRule.getLogger(RollingAppenderSizeTest.class.getName());
     }
 
     @Test
@@ -86,51 +94,46 @@ public class RollingAppenderSizeTest {
         for (int i = 0; i < 100; ++i) {
             logger.debug("This is test message number " + i);
         }
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ie) {
+            // Ignore the error.
+        }
+
         final File dir = new File(DIR);
         assertTrue("Directory not created", dir.exists() && dir.listFiles().length > 0);
         final File[] files = dir.listFiles();
         assertNotNull(files);
         assertThat(files, hasItemInArray(that(hasName(that(endsWith(fileExtension))))));
 
-        DefaultRolloverStrategy.FileExtensions ext = DefaultRolloverStrategy.FileExtensions.lookup(fileExtension);
+        final DefaultRolloverStrategy.FileExtensions ext = DefaultRolloverStrategy.FileExtensions.lookup(fileExtension);
         if (ext == null || DefaultRolloverStrategy.FileExtensions.ZIP == ext
                 || DefaultRolloverStrategy.FileExtensions.PACK200 == ext) {
-            return; // commons compress cannot deflate zip? TODO test decompressing these formats
+            return; // Apache Commons Compress cannot deflate zip? TODO test decompressing these formats
         }
-        for (File file : files) {
+        for (final File file : files) {
             if (file.getName().endsWith(fileExtension)) {
                 CompressorInputStream in = null;
                 try (FileInputStream fis = new FileInputStream(file)) {
                     try {
                         in = new CompressorStreamFactory().createCompressorInputStream(ext.name().toLowerCase(), fis);
-                    } catch (CompressorException ce) {
+                    } catch (final CompressorException ce) {
                         ce.printStackTrace();
                         fail("Error creating intput stream from " + file.toString() + ": " + ce.getMessage());
                     }
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    assertNotNull("No input stream for " + file.getName(), in);
                     IOUtils.copy(in, baos);
-                    String text = new String(baos.toByteArray(), Charset.defaultCharset());
-                    String[] lines = text.split("[\\r\\n]+");
-                    for (String line : lines) {
-                        assertTrue(line
-                                .contains("DEBUG o.a.l.l.c.a.r.RollingAppenderSizeTest [main] This is test message number"));
+                    final String text = new String(baos.toByteArray(), Charset.defaultCharset());
+                    final String[] lines = text.split("[\\r\\n]+");
+                    for (final String line : lines) {
+                        assertTrue(line.contains(
+                                "DEBUG o.a.l.l.c.a.r.RollingAppenderSizeTest [main] This is test message number"));
                     }
                 } finally {
                     Closer.close(in);
                 }
             }
-        }
-        deleteDir();
-    }
-
-    private static void deleteDir() {
-        final File dir = new File(DIR);
-        if (dir.exists()) {
-            final File[] files = dir.listFiles();
-            for (final File file : files) {
-                file.delete();
-            }
-            dir.delete();
         }
     }
 }

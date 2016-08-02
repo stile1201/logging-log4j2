@@ -180,6 +180,7 @@ public final class PatternLayout extends AbstractStringLayout {
         final StringBuilder text = toText((Serializer2) eventSerializer, event, getStringBuilder());
         final Encoder<StringBuilder> encoder = getStringBuilderEncoder();
         encoder.encode(text, destination);
+        trimToMaxSize(text);
     }
 
     /**
@@ -278,7 +279,12 @@ public final class PatternLayout extends AbstractStringLayout {
 
         @Override
         public String toSerializable(final LogEvent event) {
-            return toSerializable(event, getStringBuilder()).toString();
+            final StringBuilder sb = getStringBuilder();
+            try {
+                return toSerializable(event, sb).toString();
+            } finally {
+                trimToMaxSize(sb);
+            }
         }
 
         @Override
@@ -298,7 +304,7 @@ public final class PatternLayout extends AbstractStringLayout {
 
         @Override
         public String toString() {
-            StringBuilder builder = new StringBuilder();
+            final StringBuilder builder = new StringBuilder();
             builder.append(super.toString());
             builder.append("[formatters=");
             builder.append(Arrays.toString(formatters));
@@ -322,7 +328,12 @@ public final class PatternLayout extends AbstractStringLayout {
 
         @Override
         public String toSerializable(final LogEvent event) {
-            return toSerializable(event, getStringBuilder()).toString();
+            final StringBuilder sb = getStringBuilder();
+            try {
+                return toSerializable(event, sb).toString();
+            } finally {
+                trimToMaxSize(sb);
+            }
         }
 
         @Override
@@ -343,7 +354,7 @@ public final class PatternLayout extends AbstractStringLayout {
 
         @Override
         public String toString() {
-            StringBuilder builder = new StringBuilder();
+            final StringBuilder builder = new StringBuilder();
             builder.append(super.toString());
             builder.append("[patternSelector=");
             builder.append(patternSelector);

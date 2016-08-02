@@ -188,7 +188,18 @@
               <td>boolean</td>
               <td>Identifies whether the appender honors reassignments of System.out or System.err
                 via System.setOut or System.setErr made after configuration. Note that the follow
-                attribute cannot be used with Jansi on Windows.</td>
+                attribute cannot be used with Jansi on Windows. Cannot be used with <code>direct</code>.</td>
+            </tr>
+            <tr>
+              <td>direct</td>
+              <td>boolean</td>
+              <td>Write directly to <code>java.io.FileDescriptor</code> and bypass <code>java.lang.System.out/.err</code>.
+                Can give up to 10x performance boost when the output is redirected to file or other process.
+                Cannot be used with Jansi on Windows. Cannot be used with <code>follow</code>. Output will not respect
+                <code>java.lang.System.setOut()/.setErr()</code> and may get intertwined with other output to
+                <code>java.lang.System.out/.err</code> in a multi-threaded application.
+                <i>New since 2.6.2. Be aware that this is a new addition, and it has only been tested with Oracle JVM
+                  on Linux and Windows so far.</i></td>
             </tr>
             <tr>
               <td>name</td>
@@ -369,7 +380,8 @@
             <tr>
               <td>layout</td>
               <td>Layout</td>
-              <td>The Layout to use to format the LogEvent</td>
+              <td>The Layout to use to format the LogEvent. If no layout is supplied the default pattern layout
+                of "%m%n" will be used.</td>
             </tr>
             <tr>
               <td>locking</td>
@@ -1428,7 +1440,8 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
           <tr>
             <td>layout</td>
             <td>Layout</td>
-            <td>The Layout to use to format the LogEvent</td>
+            <td>The Layout to use to format the LogEvent. If no layout is supplied the default pattern layout
+              of "%m%n" will be used.</td>
           </tr>
           <tr>
             <td>name</td>
@@ -1766,7 +1779,7 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
 					<tt>BufferedOutputStream</tt>.
 					We saw a 20-200% performance improvement compared to
 					FileAppender with "bufferedIO=true" in our
-					<a href="async.html#RandomAccessFileAppenderPerformance">measurements</a>.
+					<a href="../performance.html#whichAppender">measurements</a>.
 					Similar to the FileAppender,
 					RandomAccessFileAppender uses a RandomAccessFileManager to actually perform the
 					file I/O. While RandomAccessFileAppender
@@ -1837,7 +1850,8 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
           <tr>
 						<td>layout</td>
 						<td>Layout</td>
-						<td>The Layout to use to format the LogEvent</td>
+						<td>The Layout to use to format the LogEvent. If no layout is supplied the default pattern layout
+              of "%m%n" will be used.</td>
 					</tr>
           <tr>
 						<td>name</td>
@@ -2148,7 +2162,8 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
             <tr>
               <td>layout</td>
               <td>Layout</td>
-              <td>The Layout to use to format the LogEvent</td>
+              <td>The Layout to use to format the LogEvent. If no layout is supplied the default pattern layout
+                of "%m%n" will be used.</td>
             </tr>
 
             <tr>
@@ -2220,9 +2235,25 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
               </table>
             <h5>OnStartup Triggering Policy</h5>
               <p>
-                The <code>OnStartupTriggeringPolicy</code> policy takes no parameters and causes a rollover if the log
-                file is older than the current JVM's start time.
+                The <code>OnStartupTriggeringPolicy</code> policy causes a rollover if the log file is older than the
+                current JVM's start time and the minimum file size is met or exceeded.
               </p>
+                <table>
+                  <caption align="top">OnStartupTriggeringPolicy Parameters</caption>
+                  <tr>
+                    <th>Parameter Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>minSize</td>
+                    <td>long</td>
+                    <td>
+                      The minimum size the file must have to roll over. A size of zero will cause a roll over no matter
+                      what the file size is. The default value is 1, which will prevent rolling over an empty file.
+                    </td>
+                  </tr>
+                </table>
               <p>
                 <em>Google App Engine note:</em><br />
                 When running in Google App Engine, the OnStartup policy causes a rollover if the log file is older
@@ -2913,7 +2944,7 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
 					instead of a <tt>BufferedOutputStream</tt>.
 					We saw a 20-200% performance improvement compared to
 					RollingFileAppender with "bufferedIO=true"
-					in our <a href="async.html#RandomAccessFileAppenderPerformance">measurements</a>.
+					in our <a href="../performance.html#whichAppender">measurements</a>.
 
 					The RollingRandomAccessFileAppender writes to the File named in the
 					fileName parameter and rolls the file over according the
@@ -3018,7 +3049,8 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
           <tr>
 						<td>layout</td>
 						<td>Layout</td>
-						<td>The Layout to use to format the LogEvent</td>
+						<td>The Layout to use to format the LogEvent. If no layout is supplied the default pattern layout
+              of "%m%n" will be used.</td>
 					</tr>
 
           <tr>
@@ -3315,7 +3347,7 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
             <tr>
               <td>layout</td>
               <td>Layout</td>
-              <td>The Layout to use to format the LogEvent. The default is SerializedLayout.</td>
+              <td>The Layout to use to format the LogEvent. If no layout is supplied <a href="layouts.html#HTMLLayout">HTML layout</a> will be used.</td>
             </tr>
             <tr>
               <td>name</td>
@@ -3778,9 +3810,8 @@ public class JpaLogEntity extends AbstractLogEventWrapperEntity {
             <tr>
               <td>Layout</td>
               <td>layout</td>
-              <td>The Layout of the Appender. If you do not specify a layout, the appender uses the default
-              pattern appender returned by
-              <a href="https://logging.apache.org/log4j/2.x/log4j-core/apidocs/org/apache/logging/log4j/core/layout/PatternLayout.html#createDefaultLayout()">PatternLayout.createDefaultLayout()</a>.</td>
+              <td>The Layout to use to format the LogEvent. If no layout is supplied the default pattern layout
+                of "%m%n" will be used.</td>
             </tr>
             <tr>
               <td>Filters</td>

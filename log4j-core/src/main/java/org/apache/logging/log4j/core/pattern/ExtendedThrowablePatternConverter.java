@@ -58,14 +58,14 @@ public final class ExtendedThrowablePatternConverter extends ThrowablePatternCon
      */
     @Override
     public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        ThrowableProxy proxy = event.getThrownProxy();
+        final ThrowableProxy proxy = event.getThrownProxy();
         final Throwable throwable = event.getThrown();
         if ((throwable != null || proxy != null) && options.anyLines()) {
             if (proxy == null) {
                 super.format(event, toAppendTo);
                 return;
             }
-            final String extStackTrace = proxy.getExtendedStackTraceAsString(options.getPackages());
+            final String extStackTrace = proxy.getExtendedStackTraceAsString(options.getIgnorePackages(), options.getTextRenderer());
             final int len = toAppendTo.length();
             if (len > 0 && !Character.isWhitespace(toAppendTo.charAt(len - 1))) {
                 toAppendTo.append(' ');
@@ -81,7 +81,6 @@ public final class ExtendedThrowablePatternConverter extends ThrowablePatternCon
                     }
                 }
                 toAppendTo.append(sb.toString());
-
             } else {
                 toAppendTo.append(extStackTrace);
             }

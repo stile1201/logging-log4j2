@@ -17,20 +17,14 @@
 package org.apache.logging.log4j.core.config;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
 import java.util.Map;
 
-import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.appender.ConsoleAppender;
 import org.apache.logging.log4j.core.appender.FileAppender;
-import org.apache.logging.log4j.core.appender.RollingFileAppender;
 import org.apache.logging.log4j.core.config.composite.CompositeConfiguration;
-import org.apache.logging.log4j.core.filter.CompositeFilter;
-import org.apache.logging.log4j.core.filter.ThresholdFilter;
 import org.apache.logging.log4j.junit.LoggerContextRule;
 import org.junit.Test;
 import org.junit.runner.Description;
@@ -88,10 +82,10 @@ public class CompositeConfigurationTest {
     @Test
     public void compositeLogger() {
         final LoggerContextRule lcr = new LoggerContextRule("classpath:log4j-comp-logger.xml,log4j-comp-logger.json");
-        Statement test = new Statement() {
+        final Statement test = new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                CompositeConfiguration config = (CompositeConfiguration) lcr.getConfiguration();
+                final CompositeConfiguration config = (CompositeConfiguration) lcr.getConfiguration();
                 Map<String, Appender> appendersMap = config.getLogger("cat1").getAppenders();
                 assertEquals("Expected 2 Appender references for cat1 but got " + appendersMap.size(), 2,
                         appendersMap.size());
@@ -164,12 +158,12 @@ public class CompositeConfigurationTest {
 
     } */
 
-    private void runTest(LoggerContextRule rule, Statement statement) {
+    private void runTest(final LoggerContextRule rule, final Statement statement) {
         try {
             rule.apply(statement, Description
                     .createTestDescription(getClass(), Thread.currentThread().getStackTrace()[1].getMethodName()))
                     .evaluate();
-        } catch (Throwable throwable) {
+        } catch (final Throwable throwable) {
             throw new RuntimeException(throwable);
         }
     }

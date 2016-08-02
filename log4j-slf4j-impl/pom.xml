@@ -18,9 +18,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>uk.co.nichesolutions.logging.log4j</groupId>
+    <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j</artifactId>
-    <version>2.6.1-CUSTOM-SNAPSHOT</version>
+    <version>2.6.3-CUSTOM-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
   <artifactId>log4j-slf4j-impl</artifactId>
@@ -34,20 +34,20 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>uk.co.nichesolutions</groupId>
+      <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>uk.co.nichesolutions</groupId>
+      <groupId>org.slf4j</groupId>
       <artifactId>slf4j-ext</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>uk.co.nichesolutions.logging.log4j</groupId>
+      <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>uk.co.nichesolutions.logging.log4j</groupId>
+      <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
@@ -58,12 +58,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>uk.co.nichesolutions.logging.log4j</groupId>
+      <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>uk.co.nichesolutions.logging.log4j</groupId>
+      <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
       <type>test-jar</type>
       <scope>test</scope>

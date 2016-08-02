@@ -16,6 +16,7 @@
  */
 package org.apache.logging.log4j.core.filter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -55,6 +56,15 @@ public final class CompositeFilter extends AbstractLifeCycle implements Iterable
             // null does nothing
             return this;
         }
+        if (filter instanceof CompositeFilter) {
+            final int size = this.filters.length + ((CompositeFilter) filter).size();
+            final Filter[] copy = Arrays.copyOf(this.filters, size);
+            final int index = this.filters.length;
+            for (final Filter currentFilter : ((CompositeFilter) filter).filters) {
+                copy[index] = currentFilter;
+            }
+            return new CompositeFilter(copy);
+        }
         final Filter[] copy = Arrays.copyOf(this.filters, this.filters.length + 1);
         copy[this.filters.length] = filter;
         return new CompositeFilter(copy);
@@ -68,8 +78,14 @@ public final class CompositeFilter extends AbstractLifeCycle implements Iterable
         // This is not a great implementation but simpler than copying Apache Commons
         // Lang ArrayUtils.removeElement() and associated bits (MutableInt),
         // which is OK since removing a filter should not be on the critical path.
-        final List<Filter> filterList = Arrays.asList(this.filters);
-        filterList.remove(filter);
+        final List<Filter> filterList = new ArrayList<>(Arrays.asList(this.filters));
+        if (filter instanceof CompositeFilter) {
+            for (final Filter currentFilter : ((CompositeFilter) filter).filters) {
+                filterList.remove(currentFilter);
+            }
+        } else {
+            filterList.remove(filter);
+        }
         return new CompositeFilter(filterList.toArray(new Filter[this.filters.length - 1]));
     }
 
