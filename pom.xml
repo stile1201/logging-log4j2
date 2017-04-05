@@ -22,7 +22,7 @@
   <artifactId>log4j</artifactId>
   <packaging>pom</packaging>
   <name>Apache Log4j 2</name>
-  <version>2.6.3-CUSTOM-SNAPSHOT</version>
+  <version>2.6.3-CUSTOM</version>
   <parent>
     <groupId>org.apache</groupId>
     <artifactId>apache</artifactId>
@@ -173,7 +173,7 @@
     <url>https://github.com/stile1201/logging-log4j2</url>
     <connection>scm:git:git://github.com/stile1201/logging-log4j2.git</connection>
     <developerConnection>scm:git:git@github.com:stile1201/logging-log4j2.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v2.6.3-CUSTOM</tag>
   </scm>
   <organization>
     <name>Apache Software Foundation</name>
