@@ -169,11 +169,11 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  <scm>
-    <connection>scm:git:http://git-wip-us.apache.org/repos/asf/logging-log4j2.git</connection>
-    <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/logging-log4j2.git</developerConnection>
-    <url>https://git-wip-us.apache.org/repos/asf?p=logging-log4j2.git;a=summary</url>
-    <tag>log4j-${Log4jReleaseVersion}</tag>
+ <scm>
+    <url>https://github.com/stile1201/logging-log4j2</url>
+    <connection>scm:git:git://github.com/stile1201/logging-log4j2.git</connection>
+    <developerConnection>scm:git:git@github.com:stile1201/logging-log4j2.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
   <organization>
     <name>Apache Software Foundation</name>
@@ -760,6 +760,21 @@
   <build>
     <pluginManagement>
       <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-gpg-plugin</artifactId>
+      <version>1.5</version>
+      <executions>
+        <execution>
+          <id>sign-artifacts</id>
+          <phase>verify</phase>
+          <goals>
+            <goal>sign</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
@@ -1187,7 +1202,7 @@
   </reporting>
   <distributionManagement>
      <repository>
-      <id>sonatype-nexus</id>
+      <id>sonatype-nexus-releases</id>
       <name>Apache Release Distribution Repository</name>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
@@ -1204,8 +1219,11 @@
   <modules>
     <module>log4j-api</module>
     <module>log4j-core</module>
+<!--
     <module>log4j-1.2-api</module>
+-->
     <module>log4j-slf4j-impl</module>
+<!--
     <module>log4j-to-slf4j</module>
     <module>log4j-jcl</module>
     <module>log4j-flume-ng</module>
@@ -1219,8 +1237,19 @@
     <module>log4j-iostreams</module>
     <module>log4j-jul</module>
     <module>log4j-liquibase</module>
+-->
   </modules>
   <profiles>
+  <profile>
+    <id>java8-doclint-disabled</id>
+    <activation>
+      <jdk>[1.8,)</jdk>
+    </activation>
+    <properties>
+      <javadoc.opts>-Xdoclint:none</javadoc.opts>
+    </properties>
+  </profile>
+
     <profile>
         <id>Windows</id>
         <activation>
