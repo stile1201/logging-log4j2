@@ -886,18 +886,6 @@
       </plugins>
     </pluginManagement>
     <plugins>
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-release-plugin</artifactId>
-    <version>2.5.3</version>
-    <configuration>
-      <!--
-        During release:perform, enable the "release" profile
-       -->
-      <releaseProfiles>apache-release</releaseProfiles>
-    </configuration>
-  </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -1349,6 +1337,7 @@
         </plugins>
       </build>
     </profile>
+<!--
     <profile>
       <id>apache-release</id>
       <build>
@@ -1370,6 +1359,7 @@
         <module>log4j-distribution</module>
       </modules>
     </profile>
+-->
     <profile>
       <id>rat</id>
       <build>
